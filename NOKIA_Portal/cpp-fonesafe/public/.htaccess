@@ -1,0 +1,16 @@
+RewriteBase /
+
+Options +FollowSymLinks
+RewriteEngine On
+
+RewriteCond %{REQUEST_METHOD} ^(OPTIONS|HEAD) 
+RewriteRule .* - [F]
+
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
+
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [L]

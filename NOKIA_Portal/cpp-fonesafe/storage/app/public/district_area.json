@@ -1,0 +1,552 @@
+[
+{
+	"id":"1",
+	"name":"Barguna",
+	"parent":"0"
+},
+{
+	"id":"2",
+	"name":"Barishal",
+	"parent":"0"	
+},
+{
+	"id":"3",
+	"name":"Bhola",
+	"parent":"0"
+},
+{
+	"id":"4",
+	"name":"Jhalokati",
+	"parent":"0"	
+},
+{
+	"id":"5",
+	"name":"Patuakhali",
+	"parent":"0"
+},
+{
+	"id":"6",
+	"name":"Pirojpur",
+	"parent":"0"	
+},
+{
+	"id":"7",
+	"name":"Bandarban",
+	"parent":"0"
+},
+{
+	"id":"8",
+	"name":"Brahmanbaria",
+	"parent":"0"	
+},
+{
+	"id":"9",
+	"name":"Chandpur",
+	"parent":"0"
+},
+{
+	"id":"10",
+	"name":"Chattogram",
+	"parent":"0"	
+},
+{
+	"id":"11",
+	"name":"Cox's Bazar",
+	"parent":"0"
+},
+{
+	"id":"12",
+	"name":"Cumilla",
+	"parent":"0"	
+},
+{
+	"id":"13",
+	"name":"Feni",
+	"parent":"0"
+},
+{
+	"id":"14",
+	"name":"Khagrachhari",
+	"parent":"0"	
+},
+{
+	"id":"15",
+	"name":"Lakshmipur",
+	"parent":"0"
+},
+{
+	"id":"16",
+	"name":"Noakhali",
+	"parent":"0"	
+},
+{
+	"id":"17",
+	"name":"Rangamati",
+	"parent":"0"
+},
+{
+	"id":"18",
+	"name":"Dhaka",
+	"parent":"0"	
+},
+{
+	"id":"19",
+	"name":"Faridpur",
+	"parent":"0"
+},
+{
+	"id":"20",
+	"name":"Gazipur",
+	"parent":"0"	
+},
+{
+	"id":"21",
+	"name":"Gopalganj",
+	"parent":"0"
+},
+{
+	"id":"22",
+	"name":"Kishoreganj",
+	"parent":"0"	
+},
+{
+	"id":"23",
+	"name":"Madaripur",
+	"parent":"0"
+},
+{
+	"id":"24",
+	"name":"Manikganj",
+	"parent":"0"	
+},
+{
+	"id":"25",
+	"name":"Munshiganj",
+	"parent":"0"
+},
+{
+	"id":"26",
+	"name":"Narayanganj",
+	"parent":"0"	
+},
+{
+	"id":"27",
+	"name":"Narsingdi",
+	"parent":"0"
+},
+{
+	"id":"28",
+	"name":"Rajbari",
+	"parent":"0"	
+},
+{
+	"id":"29",
+	"name":"Shariatpur",
+	"parent":"0"
+},
+{
+	"id":"30",
+	"name":"Tangail",
+	"parent":"0"	
+},
+{
+	"id":"31",
+	"name":"Bagerhat",
+	"parent":"0"
+},
+{
+	"id":"32",
+	"name":"Chuadanga",
+	"parent":"0"	
+},
+{
+	"id":"33",
+	"name":"Jashore",
+	"parent":"0"
+},
+{
+	"id":"34",
+	"name":"Jhenaidah",
+	"parent":"0"	
+},
+{
+	"id":"35",
+	"name":"Khulna",
+	"parent":"0"
+},
+{
+	"id":"36",
+	"name":"Kushtia",
+	"parent":"0"	
+},
+{
+	"id":"37",
+	"name":"Magura",
+	"parent":"0"
+},
+{
+	"id":"38",
+	"name":"Meherpur",
+	"parent":"0"	
+},
+{
+	"id":"39",
+	"name":"Narail",
+	"parent":"0"
+},
+{
+	"id":"40",
+	"name":"Satkhira",
+	"parent":"0"	
+},
+{
+	"id":"41",
+	"name":"Jamalpur",
+	"parent":"0"
+},
+{
+	"id":"42",
+	"name":"Mymensingh",
+	"parent":"0"	
+},
+{
+	"id":"43",
+	"name":"Netrokona",
+	"parent":"0"
+},
+{
+	"id":"44",
+	"name":"Sherpur",
+	"parent":"0"	
+},
+{
+	"id":"45",
+	"name":"Bogura",
+	"parent":"0"
+},
+{
+	"id":"46",
+	"name":"Joypurhat",
+	"parent":"0"	
+},
+{
+	"id":"47",
+	"name":"Naogaon",
+	"parent":"0"
+},
+{
+	"id":"48",
+	"name":"Natore",
+	"parent":"0"	
+},
+{
+	"id":"49",
+	"name":"Chapainawabganj",
+	"parent":"0"
+},
+{
+	"id":"50",
+	"name":"Pabna",
+	"parent":"0"	
+},
+{
+	"id":"51",
+	"name":"Rajshahi",
+	"parent":"0"
+},
+{
+	"id":"52",
+	"name":"Sirajganj",
+	"parent":"0"	
+},
+{
+	"id":"53",
+	"name":"Dinajpur",
+	"parent":"0"
+},
+{
+	"id":"54",
+	"name":"Gaibandha",
+	"parent":"0"	
+},
+{
+	"id":"55",
+	"name":"Kurigram",
+	"parent":"0"
+},
+{
+	"id":"56",
+	"name":"Lalmonirhat",
+	"parent":"0"	
+},
+{
+	"id":"57",
+	"name":"Nilphamari",
+	"parent":"0"
+},
+{
+	"id":"58",
+	"name":"Panchagarh",
+	"parent":"0"	
+},
+{
+	"id":"59",
+	"name":"Rangpur",
+	"parent":"0"
+},
+{
+	"id":"60",
+	"name":"Thakurgaon",
+	"parent":"0"	
+},
+{
+	"id":"61",
+	"name":"Habiganj",
+	"parent":"0"
+},
+{
+	"id":"62",
+	"name":"Moulvibazar",
+	"parent":"0"	
+},
+{
+	"id":"63",
+	"name":"Sunamganj",
+	"parent":"0"
+},
+{
+	"id":"64",
+	"name":"Sylhet",
+	"parent":"0"	
+},
+{
+	"id":"65",
+	"name":"Adabor",
+	"parent":"Dhaka"
+},
+{
+	"id":"66",
+	"name":"Badda",
+	"parent":"Dhaka"	
+},
+{
+	"id":"67",
+	"name":"Bandar",
+	"parent":"Dhaka"
+},
+{
+	"id":"68",
+	"name":"Bangshal",
+	"parent":"Dhaka"	
+},
+{
+	"id":"69",
+	"name":"Biman Bandar",
+	"parent":"Dhaka"
+},
+{
+	"id":"70",
+	"name":"Cantonment",
+	"parent":"Dhaka"	
+},
+{
+	"id":"71",
+	"name":"Chawkbazar",
+	"parent":"Dhaka"
+},
+{
+	"id":"72",
+	"name":"Dakshinkhan",
+	"parent":"Dhaka"	
+},
+{
+	"id":"73",
+	"name":"Darus Salam",
+	"parent":"Dhaka"
+},
+{
+	"id":"74",
+	"name":"Demra",
+	"parent":"Dhaka"	
+},
+{
+	"id":"75",
+	"name":"Dhanmondi",
+	"parent":"Dhaka"
+},
+{
+	"id":"76",
+	"name":"Gazipur Sadar",
+	"parent":"Dhaka"	
+},
+{
+	"id":"77",
+	"name":"Gendaria",
+	"parent":"Dhaka"
+},
+{
+	"id":"78",
+	"name":"Gulshan",
+	"parent":"Dhaka"	
+},
+{
+	"id":"79",
+	"name":"Hazaribagh",
+	"parent":"Dhaka"
+},
+{
+	"id":"80",
+	"name":"Jatrabari",
+	"parent":"Dhaka"	
+},
+{
+	"id":"81",
+	"name":"Kadamtali",
+	"parent":"Dhaka"
+},
+{
+	"id":"82",
+	"name":"Kafrul",
+	"parent":"Dhaka"	
+},
+{
+	"id":"83",
+	"name":"Kalabagan",
+	"parent":"Dhaka"
+},
+{
+	"id":"84",
+	"name":"Kamrangirchar",
+	"parent":"Dhaka"	
+},
+{
+	"id":"85",
+	"name":"Keraniganj",
+	"parent":"Dhaka"
+},
+{
+	"id":"86",
+	"name":"Khilgaon",
+	"parent":"Dhaka"	
+},
+{
+	"id":"87",
+	"name":"Khilkhet",
+	"parent":"Dhaka"
+},
+{
+	"id":"88",
+	"name":"Kotwali",
+	"parent":"Dhaka"	
+},
+{
+	"id":"89",
+	"name":"Lalbagh",
+	"parent":"Dhaka"
+},
+{
+	"id":"90",
+	"name":"Mirpur",
+	"parent":"Dhaka"	
+},
+{
+	"id":"91",
+	"name":"Mohammadpur",
+	"parent":"Dhaka"
+},
+{
+	"id":"92",
+	"name":"Motijheel",
+	"parent":"Dhaka"	
+},
+{
+	"id":"93",
+	"name":"Narayanganj Sadar",
+	"parent":"Dhaka"
+},
+{
+	"id":"94",
+	"name":"New Market",
+	"parent":"Dhaka"	
+},
+{
+	"id":"95",
+	"name":"Pallabi",
+	"parent":"Dhaka"
+},
+{
+	"id":"96",
+	"name":"Paltan",
+	"parent":"Dhaka"	
+},
+{
+	"id":"97",
+	"name":"Ramna",
+	"parent":"Dhaka"
+},
+{
+	"id":"98",
+	"name":"Rampura",
+	"parent":"Dhaka"	
+},
+{
+	"id":"99",
+	"name":"Sabujbagh",
+	"parent":"Dhaka"
+},
+{
+	"id":"100",
+	"name":"Savar",
+	"parent":"Dhaka"	
+},
+{
+	"id":"101",
+	"name":"Shah Ali",
+	"parent":"Dhaka"
+},
+{
+	"id":"102",
+	"name":"Shahbagh",
+	"parent":"Dhaka"	
+},
+{
+	"id":"103",
+	"name":"Sher-e-Bangla Nagar",
+	"parent":"Dhaka"
+},
+{
+	"id":"104",
+	"name":"Shyampur",
+	"parent":"Dhaka"	
+},
+{
+	"id":"105",
+	"name":"Sutrapur",
+	"parent":"Dhaka"
+},
+{
+	"id":"106",
+	"name":"Tejgaon",
+	"parent":"Dhaka"	
+},
+{
+	"id":"107",
+	"name":"Tejgaon Industrial Area",
+	"parent":"Dhaka"
+},
+{
+	"id":"108",
+	"name":"Trag",
+	"parent":"Dhaka"	
+},
+{
+	"id":"109",
+	"name":"Uttara",
+	"parent":"Dhaka"
+},
+{
+	"id":"110",
+	"name":"Uttar Khan",
+	"parent":"Dhaka"	
+}
+]
