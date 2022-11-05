@@ -70,9 +70,29 @@
                             </div>
                             <div class="col-lg-2"></div>
                         </div>
+
+
+                        <div class="row{{ $errors->has('device_price') ? ' has-error' : '' }} clearfix">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5 form-control-label">
+                                <label for="device_price" class="control-label">Device Price </label>
+                            </div>
+                            <div class="col-lg-6 col-md-8 col-sm-8 col-xs-7">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" name="device_price" id="device_price" class="form-control" value="{{ $phone_models->device_price }}" placeholder="ex-P30">
+                                    </div>
+                                </div>
+                                @if ($errors->has('device_price'))
+                                <span class="help-block">{{ $errors->first('device_price') }}</span>
+                                @endif
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+
+
                         <div class="row{{ $errors->has('fs_mrp') ? ' has-error' : '' }} clearfix">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5 form-control-label">
-                                <label for="fs_mrp" class="control-label">MRP (Screen Protection)&nbsp;<img src="{{ asset('assets/taka.png') }}" width="8" height="10"> </label>
+                                <label for="fs_mrp" class="control-label">Nokia Safeguard Price&nbsp;<img src="{{ asset('assets/taka.png') }}" width="8" height="10"> </label>
                             </div>
                             <div class="col-lg-6 col-md-8 col-sm-8 col-xs-7">
                                 <div class="form-group">
@@ -86,8 +106,25 @@
                             </div>
                             <div class="col-lg-2"></div>
                         </div>
+
+                        <div class="row{{ $errors->has('Cpp_Price') ? ' has-error' : '' }} clearfix">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5 form-control-label">
+                                <label for="Cpp_Price" class="control-label">CPP Price&nbsp;<img src="{{ asset('assets/taka.png') }}" width="8" height="10"> </label>
+                            </div>
+                            <div class="col-lg-6 col-md-8 col-sm-8 col-xs-7">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="number" name="Cpp_Price" id="Cpp_Price" class="form-control" value="{{ $phone_models->Cpp_Price }}" placeholder="ex-15990">
+                                    </div>
+                                </div>
+                                @if ($errors->has('Cpp_Price'))
+                                <span class="help-block">{{ $errors->first('Cpp_Price') }}</span>
+                                @endif
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
                         
-                        <div class="row{{ $errors->has('mrp_ew') ? ' has-error' : '' }} clearfix">
+                        <!-- <div class="row{{ $errors->has('mrp_ew') ? ' has-error' : '' }} clearfix">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5 form-control-label">
                                 <label for="mrp_ew" class="control-label">MRP (Extended Warranty)&nbsp;<img src="{{ asset('assets/taka.png') }}" width="8" height="10"> </label>
                             </div>
@@ -102,7 +139,7 @@
                                 @endif
                             </div>
                             <div class="col-lg-2"></div>
-                        </div>
+                        </div> -->
 
                         <div class="row clearfix">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5 form-control-label">

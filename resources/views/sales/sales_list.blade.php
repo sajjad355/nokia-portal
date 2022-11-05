@@ -110,6 +110,11 @@
                                 <!-- <th>District</th>
                                 <th>FS Code</th> -->
                                 <th>CPP Price</th>
+                                <th>Merchant Invoice Number</th>
+
+                                <th>Transaction Status</th>
+                                <th>Transaction ID</th>
+                                <th>Transaction Time</th>
 
  
                                 <th>Nokia Safeguard MRP</th>
@@ -134,8 +139,14 @@
                                 <!-- <td>{{ $sale->brand}}</td> -->
                                 <td>{{ $sale->model}}</td>
                                 <td>{{ $sale->price}}</td>
+
                                 <td>{{ $sale->mobile}}</td>
                                 <td>{{ $sale->cpp_price}}</td>
+                                <td>{{ $sale->invoice}}</td>
+
+                                <td>{{ $sale->transactionStatus}}</td>
+                                <td>{{ $sale->tranxactionId}}</td>
+                                <td>{{ $sale->paymentTime}}</td>
 
                                 <!-- @if($sale->gender=='M')
                                 <td>Male</td>

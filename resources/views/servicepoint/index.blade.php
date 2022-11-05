@@ -50,6 +50,9 @@
                     <li>I shall not use or disclose any customer data and privacy to any one</li>
                     <li>Image is taken in front of me. Any attempt to fraudulent activity shall nullify claim</li>
                     <li>I shall comply with the image specification (IMEI showing in the screen – where possible before and after servicing.</li>
+                    <li>I shall comply with the image specification</li>
+                    <li>IMEI Image Should contain 4 digits OTP-see image at below</li>
+                    <img src="{{ asset('assets/imeiDis.png') }}" width="400" height="400">
                 </ol>
                 <br><br><br>
                 <div class="row clearfix">
@@ -192,9 +195,13 @@ foreach ($outlet_name as $name) {
                                 <input type="hidden" value="{{ $search_results->price }}" name="price">
                                 <input type="hidden" value="{{ $search_results->fs_code }}" name="fs_code">
                                 <tr>
+                                    <th>OTP</th>
+                                    <td><input type="text" class="form-control" value="<?php echo rand(1000,9999); ?>" name="fs_code" readonly></td>
+                                </tr>
+                                <tr>
                                     <td colspan="2">
                                         <div class="row">
-                                            <div class="col-md-4"><b>Don't worry purchase date</b><input type="text" value="{{ Carbon\Carbon::parse($search_results->created_at)->isoformat('M/D/YYYY, h:mm:ss a') }}" class="form-control" readonly></div>
+                                            <div class="col-md-4"><b>Mobile Safeguard</b><input type="text" value="{{ Carbon\Carbon::parse($search_results->created_at)->isoformat('M/D/YYYY, h:mm:ss a') }}" class="form-control" readonly></div>
                                             <div class="col-md-4"><b>Device purchase date</b><input type="text" value="{{ $search_results->device_purchase_date }}" class="form-control" readonly></div>
                                             <div class="col-md-4"><b>Purchase Center</b><input type="text" value="{{ $purchase_center_name }}" class="form-control" readonly></div>
                                         </div>
@@ -202,7 +209,7 @@ foreach ($outlet_name as $name) {
                                     <input type="hidden" name="purchase_date" value="{{ $search_results->created_at }}">
                                 </tr>
                                 <tr>
-                                    <th>Customer Name:</th>
+                                    <th>Sales user Name:</th>
                                     <td><input type="text" class="form-control" value="{{ $search_results->customer_name }}" readonly></td>
                                 </tr>
                                 <tr>
@@ -234,6 +241,8 @@ foreach ($outlet_name as $name) {
 
                                         </div><br>
                                         <i class="fa fa-info-circle" aria-hidden="true"></i> <span><i style="color: #124191;">Please ensure IMEI is displayed on the screen</i></span><br>
+
+                                        <i class="fa fa-info-circle" aria-hidden="true"></i> <span><i style="color: #124191;">OTP Should be visible</i></span><br>
 
                                         @if ($errors->has('image'))
                                         <span class="help-block">{{ $errors->first('image') }}</span>

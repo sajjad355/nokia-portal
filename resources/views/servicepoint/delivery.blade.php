@@ -154,8 +154,13 @@ foreach ($outlet_name as $name) {
                                     <th>Model</th>
                                     <td><input type="text" class="form-control" name="model" value="{{ $search_results->model }}" readonly></td>
                                 </tr>
+                                <tr>
+                                    <th>OTP</th>
+                                    <td><input type="text" class="form-control" name="fs_code" value="{{ $otp }}" readonly></td>
+                                </tr>
+
                                 <input type="hidden" value="{{ $search_results->price }}" name="price">
-                                <input type="hidden" value="{{ $search_results->fs_code }}" name="fs_code">
+                                <!-- <input type="hidden" value="{{ $search_results->fs_code }}" name="fs_code"> -->
                                 <tr>
                                     <td colspan="2">
                                         <div class="row">
@@ -166,7 +171,7 @@ foreach ($outlet_name as $name) {
                                     <input type="hidden" name="purchase_date" value="{{ $search_results->created_at }}">
                                 </tr>
                                 <tr>
-                                    <th>Customer Name:</th>
+                                    <th>Sales User Name:</th>
                                     <td><input type="text" class="form-control" value="{{ $search_results->customer_name }}" readonly></td>
                                 </tr>
                                 <tr>
@@ -198,6 +203,7 @@ foreach ($outlet_name as $name) {
                                             
                                         </div><br>
                                         <i class="fa fa-info-circle" aria-hidden="true"></i> <span><i style="color: #124191;">Please ensure IMEI is displayed on the screen</i></span><br>
+                                        <i class="fa fa-info-circle" aria-hidden="true"></i> <span><i style="color: #124191;">OTP Should be visible</i></span><br>
                                         
                                         @if ($errors->has('image'))
                                         <span class="help-block">{{ $errors->first('image') }}</span>
@@ -365,7 +371,7 @@ foreach ($outlet_name as $name) {
                 dataType: 'JSON',
                 async: false,
                 success: function(response) {
-                    console.log(response);
+                    // console.log(response);
                     // Add response in Modal body
                     $('.modal-body').html(response);
 

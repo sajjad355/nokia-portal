@@ -386,6 +386,8 @@ public function imei_wise_delete_report(Request $request)
 
     public function date_wise()
     {
+        Sales::where('status', 'Not paid')->delete();
+
         $params = [
             'title' => 'Date Wise Report'
         ];
@@ -952,7 +954,7 @@ public function imei_wise_delete_report(Request $request)
     {
         $message = 'Sale record has been deleted!';
         Fscodes::where('fscode', $fscode)->update(array('status' => 1, 'sale_by' => 0, 'sale_date' => ''));
-        Sales::where('fs_code', $fscode)->delete();
+        // Sales::where('fs_code', $fscode)->delete();
         Files::where('imei', $imei)->delete();
         ActivationHistory::where('imei', $imei)->delete();
         return back()->with('msg', $message);
@@ -960,11 +962,13 @@ public function imei_wise_delete_report(Request $request)
         // return redirect()->route('ins_sales')->with('jsAlert', $message);
     }
 
-    public function delete_sales($imei)
+    public function delete_sales($imei, $servicetype)
     {
         $message = 'Sale record has been deleted!';
         //Fscodes::where('fscode', $fscode)->update(array('status' => 1, 'sale_by' => 0, 'sale_date' => ''));
-        Sales::where('imei', $imei)->delete();
+        Sales::where('imei', $imei)
+        ->where('service_type', $servicetype)
+        ->delete();
         Files::where('imei', $imei)->delete();
         ActivationHistory::where('imei', $imei)->delete();
         return back()->with('msg', $message);

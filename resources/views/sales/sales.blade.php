@@ -44,6 +44,9 @@
                     <li>I shall not use or disclose any customer data and privacy to any one</li>
                     <li>I am solely accountable for whatever data (IMEI, Date, Model) and Image (Invoice, Phone) is given</li>
                     <li>I shall comply with the image specification</li>
+                    <li>IMEI Image Should contain 4 digits OTP-see image at below</li>
+                    <img src="{{ asset('assets/imeiDis.png') }}" width="400" height="400">
+
                 </ol>
                 <br><br><br>
                 <div class="row clearfix">
@@ -96,6 +99,24 @@
                         @endisset
                         <!-- <input type="hidden" name="service_type" value="Don’t Worry Screen Protection"> -->
 
+                        <div class="col-lg-5 col-md-12 ">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-control-label">
+                                                <label class="" for="imei" style="font-size:20px;font-weight:bold;color:maroon">OTP is:</label>
+                                            </div>
+                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8{{ $errors->has('imei') ? ' has-error' : '' }} clearfix">
+                                                <div class="form-group form-float">
+                                                    <div class="">
+                                                    <input type="text" name="fs_code" id="fs_code" value="<?php echo rand(1000,9999); ?>" readonly style="margin-top:6px; font-size:20px;font-weight:bold;color:maroon;border:none" >
+                                                    </div>
+                                                </div>
+                                                @if ($errors->has('imei'))
+                                                <span class="help-block">{{ $errors->first('imei') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+
                         <div class="row">
                             
                             <div class="col-md-12">
@@ -124,7 +145,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-lg-5 col-md-12">
                                         <div class="row">
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-control-label">
                                                 <label class="control-label" for="imei">IMEI </label>
@@ -189,7 +210,7 @@
                                     </div>
 
 
-                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-lg-6 col-md-12">
                                         <div class="row">
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-control-label">
                                                 <label class="control-label" for="mobile">Customer Mobile No. </label>
@@ -243,8 +264,46 @@
                                             </div>
                                         </div>
                                     </div>
+                                  
+                                                      <div class="row">
+                            <div class="col-lg-2 col-md-12 col-sm-4 col-xs-4 form-control-label">
+                                <label class="control-label" for="image">Invoice Image </label>
+                            </div>
+                            <div class="col-lg-4 col-md-8 col-sm-8 col-xs-8{{ $errors->has('image') ? ' has-error' : '' }} clearfix">
+                                <div class="control-group input-group increment panel panel-default">
+                                    <input type="file" name="image[]" id="invoice-image" class="form-control" accept="image/x-png,image/jpg,image/jpeg">
+                                    
+                                </div>
+                                <i class="fa fa-info-circle" aria-hidden="true"></i> <span><i style="color: #124191;">Date, IMEI and Phone Model should be mentioned in the invoice</i></span>
+                                
+                                @if ($errors->has('image'))
+                                <span class="help-block">{{ $errors->first('image') }}</span>
+                                @endif
+                            </div>
+                        </div>
 
-                                    <div class="col-lg-6" hidden >
+                        <div class="row{{ $errors->has('image') ? ' has-error' : '' }} clearfix">
+                            <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4 form-control-label">
+                                <label class="control-label" for="image">Handset Front side picture </label>
+                            </div>
+                            <div class="col-lg-10 col-md-8 col-sm-8 col-xs-8">
+                                <div class="control-group input-group increment panel panel-default">
+                                    <input type="file" name="image[]" id="handset-front-side-picture" class="form-control" accept="image/x-png,image/jpg,image/jpeg">
+                                    
+                                </div>
+                                <i class="fa fa-info-circle" aria-hidden="true"></i> <span><i style="color: #124191;">Please ensure IMEI is displayed on the screen</i></span><br>
+                                <i class="fa fa-info-circle" aria-hidden="true"></i> <span><i style="color: #124191;">Image size should not more than 1 MB (Allowed extensions: .jpg, .jpeg, .png)</i></span><br>
+                                <i class="fa fa-info-circle" aria-hidden="true"></i> <span><i style="color: #124191;">OTP should be visible</i></span>
+                                
+                                @if ($errors->has('image'))
+                                <span class="help-block">{{ $errors->first('image') }}</span>
+                                @endif
+                            </div>
+                        </div>
+
+                        
+
+                                    <!-- <div class="col-lg-6" hidden >
                                         <div class="row">
 
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-control-label" >
@@ -258,7 +317,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
 
 
 
@@ -280,7 +339,7 @@
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
-                                <button disabled style="background-color:#124191;color:white" type="submit"  id="submit" class="btn btn-lg btn-block waves-effect">Proceed</button>
+                                <button disabled style="background-color:#124191;color:white" type="submit"  id="submit" class="btn btn-lg btn-block waves-effect">Payment</button>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                             </div>
@@ -301,7 +360,7 @@
             $('#model').on('change', function() {
             var value = $(this).val();
             var service = $('#product').val();
-            console.log(service);
+            // console.log(service);
             $.ajax({
                 type: 'post',
                 url: '{{route("get_mrp")}}',
@@ -328,7 +387,7 @@
 
         $('#product').on('change', function() {
             $('#model').val(null).trigger('change');
-            console.log("h");
+            // console.log("h");
 
         });
 
@@ -382,7 +441,7 @@
                     },
                     dataType: 'JSON',
                     success: function(data) {
-                        console.log(data)
+                        // console.log(data)
                         if (data != null && data.length > 0) {
  
                             // $('#brand').val(data[0].brand);
@@ -399,7 +458,7 @@
                             // $('#model').attr('readonly', true);
                             // $('#brand').attr('readonly', true);
                         } else {
-                            alert('This IMEI number is not found.')
+                            alert('This IMEI number is not found or Already Used')
                             // $('#brand').val('');
                             // $('#model').val('');
                             $('#submit').attr('disabled', 'disabled');
@@ -430,10 +489,10 @@
                 success: function(data) {
                     if (data != null) {
                         $('#fs_code').change().val(data.fscode);
-                        console.log(data.fscode); 
+                        // console.log(data.fscode); 
                     } else {
                         $('#fs_code').change().val('');
-                        console.log("No Fs Code Selected!"); 
+                        // console.log("No Fs Code Selected!"); 
 
                     }
                 }
@@ -537,25 +596,25 @@
         }
 
         // validate Image upload
-        // var image_front = document.getElementById("handset-front-side-picture");
-        // var invoice_image = document.getElementById("invoice-image");
-        // var file_front = image_front.value;
-        // var file_invoice = invoice_image.value;
-        // var reg = /(.*?)\.(jpg|jpeg|png)$/;
-        // if (invoice_image.value == "" || invoice_image.value == null) {
-        //     alert("Please select invoice image");
-        //     return false;
-        // } else if (!file_invoice.match(reg)) {
-        //     alert("Invalid file, allowed extensions are: .jpg, .jpeg, .png");
-        //     return false;
-        // }
-        // if (image_front.value == "" || image_front.value == null) {
-        //     alert("Please select handset front side picture");
-        //     return false;
-        // } else if (!file_front.match(reg)) {
-        //     alert("Invalid file, allowed extensions are: .jpg, .jpeg, .png");
-        //     return false;
-        // }
+        var image_front = document.getElementById("handset-front-side-picture");
+        var invoice_image = document.getElementById("invoice-image");
+        var file_front = image_front.value;
+        var file_invoice = invoice_image.value;
+        var reg = /(.*?)\.(jpg|jpeg|png)$/;
+        if (invoice_image.value == "" || invoice_image.value == null) {
+            alert("Please select invoice image");
+            return false;
+        } else if (!file_invoice.match(reg)) {
+            alert("Invalid file, allowed extensions are: .jpg, .jpeg, .png");
+            return false;
+        }
+        if (image_front.value == "" || image_front.value == null) {
+            alert("Please select handset front side picture");
+            return false;
+        } else if (!file_front.match(reg)) {
+            alert("Invalid file, allowed extensions are: .jpg, .jpeg, .png");
+            return false;
+        }
 
         // Validate purchase date
         // var purchaseDate = $("#device_purchase_date").val();

@@ -38,7 +38,7 @@ class ServicePointController extends Controller
             ->get();
 
         $params = [
-            'title' => 'EERNA',
+            'title' => 'NOKIA',
             'outlet_name' => $outlet
         ];
 
@@ -207,9 +207,17 @@ class ServicePointController extends Controller
             $orderLog->info('admin', $log);
         }
 
+        // $otp = DB::table('service_histories')->select('fs_code')->where('imei', '=', "$imei")->get();
+        $otp=DB::table('service_histories')
+        ->select('fs_code')
+        ->where('imei', '=', $imei)
+        ->pluck('fs_code')
+        ->first();
+
         $params = [
-            'title' => 'Huawei mobile Don’t Worry',
+            'title' => 'NOKIA',
             'search_results' => $search_result,
+            'otp' => $otp,
             'days' => $days,
             'outlet_name' => $outlet,
             'deliveryStatus' => $delivery_status,
@@ -273,7 +281,7 @@ class ServicePointController extends Controller
                     }
 
                     $params = [
-                        'title' => 'Huawei mobile Don’t Worry',
+                        'title' => 'NOKIA',
                         'phone_number' => $phone,
                         'outlet_name' => $outlet,
                         'otp' => $otp
@@ -293,7 +301,7 @@ class ServicePointController extends Controller
                 } else {
 
                     $params = [
-                        'title' => 'Huawei mobile Don’t Worry',
+                        'title' => 'NOKIA',
                         'outlet_name' => $outlet,
                         'search_results' => $search,
                     ];
@@ -313,7 +321,7 @@ class ServicePointController extends Controller
             } else {
 
                 $params = [
-                    'title' => 'Huawei mobile Don’t Worry',
+                    'title' => 'NOKIA',
                     'phone_number' => $phone,
                     'outlet_name' => $outlet,
                     'search_results' => $search,
@@ -348,7 +356,7 @@ class ServicePointController extends Controller
                 ->get();
 
             $params = [
-                'title' => 'Huawei mobile Don’t Worry',
+                'title' => 'NOKIA',
                 'outlet_name' => $outlet,
                 'search_results' => $search,
             ];
@@ -362,7 +370,7 @@ class ServicePointController extends Controller
                 ->get();
 
             $params = [
-                'title' => 'Huawei mobile Don’t Worry',
+                'title' => 'NOKIA',
                 'outlet_name' => $outlet,
                 'phone_number' => $phone
             ];
@@ -391,7 +399,7 @@ class ServicePointController extends Controller
             ->get();
 
         $params = [
-            'title' => 'Huawei mobile Don’t Worry',
+            'title' => 'NOKIA',
             'outlet_name' => $outlet,
             'search_results' => $search,
         ];

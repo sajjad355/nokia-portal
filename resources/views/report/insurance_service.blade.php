@@ -183,7 +183,7 @@
                 dataType: 'JSON',
                 async: false,
                 success: function(response) {
-                    console.log(response);
+                    // console.log(response);
                     // Add response in Modal body
                     $('.modal-body').html(response);
 

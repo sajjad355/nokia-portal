@@ -157,15 +157,19 @@ class PhoneModelController extends Controller
             $this->validate($request, [
                 'brand_name' => 'required',
                 'model_name' => 'required',
+                'device_price' => 'required',
                 'fs_mrp' => 'required',
-                'mrp_ew' => 'required'
+                'Cpp_Price' => 'required',
+                // 'mrp_ew' => 'required',
+                // 'fs_mrp' => 'required',
+                // 'mrp_ew' => 'required',
             ]);
 
             $phone_model->brand_name = $request->input('brand_name');
             $phone_model->model_name = $request->input('model_name');
+            $phone_model->device_price = $request->input('device_price');
             $phone_model->mrp = $request->input('fs_mrp');
-            $phone_model->mrp_ew = $request->input('mrp_ew');
-            $phone_model->status = $request->input('status');
+            $phone_model->Cpp_Price = $request->input('Cpp_Price');
 
             $phone_model->save();
 

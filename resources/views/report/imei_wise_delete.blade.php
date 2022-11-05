@@ -144,7 +144,7 @@
            
                             <td><button data-id="{{ $row->id }}" class='btn btn-info image'>Image</button></td>
                                       
-                                <form action="{{ route('delete_sales',[$row->imei]) }}" method="POST">
+                                <form action="{{ route('delete_sales',[$row->imei,$row->service_type]) }}" method="POST">
                                     @csrf
                                     <td><button type="submit" onclick="return confirm('Are you sure?')" class='btn btn-info image'>Delete</button></td>
                                 </form>

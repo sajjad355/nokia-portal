@@ -38,6 +38,10 @@ class SaleController extends Controller
      */
     public function index()
     {
+        // Sales::where('invoice', $invoice->merchantInvoiceNumber)
+        // ->update(array('transactionStatus' => "Completed", 'tranxactionId' => $imei, 'paymentTime' => Carbon::now() ) );
+
+        Sales::where('status', 'Not paid')->delete();
        $a=Auth::user()->updated_at;
         $date1 =  Carbon::now();
         $days = $date1->diffInDays($a);
@@ -63,6 +67,7 @@ class SaleController extends Controller
                 ->get();
         }
 
+
         // if ($user->hasRole(['supadmin', 'admin'])) {
         //     $get_commission_sum = DB::table('sales')->sum('retailed_commission');
         // } else {
@@ -78,13 +83,132 @@ class SaleController extends Controller
         }
     }
 
+    public function successStore($invoice){
+
+ 
+
+        return redirect()->route('sales.create')->with('successMsg', 'Thank you for purchase.');
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function success(Request $invoice)
+    {
+
+        $name=Auth::user()->name;
+
+        Sales::where('invoice',  $invoice->merchantInvoiceNumber)
+        ->update(array('transactionStatus' => $invoice->transactionStatus, 'tranxactionId' => $invoice->trxID, 'paymentTime' => $invoice->updateTime ) );
+
+        
+        $imei=DB::table('sales')
+        ->select('imei')
+        ->where('invoice', '=', $invoice->merchantInvoiceNumber)
+        ->pluck('imei')
+        ->first();
+
+        // Imei::where('imei',  $imei)
+        // ->update(array('status' => 3, 'sale_by' => $name ));
+
+        $mobile=DB::table('sales')
+        ->select('mobile')
+        ->where('invoice', '=', $invoice->merchantInvoiceNumber)
+        ->pluck('mobile')
+        ->first();
+
+        $mrp=DB::table('sales')
+        ->select('fs_mrp')
+        ->where('invoice', '=', $invoice->merchantInvoiceNumber)
+        ->pluck('fs_mrp')
+        ->first();
+
+        $serviceType=DB::table('sales')
+        ->select('service_type')
+        ->where('invoice', '=',$invoice->merchantInvoiceNumber)
+        ->pluck('service_type')
+        ->first();
+
+        Sales::where('invoice', $invoice->merchantInvoiceNumber)->update(array('status' => 'paid'));
+        $username = env("SMS_USERNAME", null);
+        $password = env("SMS_PASSWORD", null);
+        $sid = env("SMS_SID", null);
+        $SslWirelessSms = new SslWirelessSms($username, $password, $sid);
+
+        if($serviceType=="Screen Damage Protection") {
+
+        $output = $SslWirelessSms->send($mobile, "Thanks for purchasing Mobile SafeGuard for 1 year, price BDT $mrp against IMEI:$imei. For support call 09612100900 (10am-7pm), Thanks");  
+        
+        $fSecure_code=DB::table('fsecure')
+        ->select('fsecure_code')
+        ->Where('service_type', "Screen Damage Protection")
+        ->Where('status', 0)
+        ->pluck('fsecure_code')
+        ->first();
+
+        $output = $SslWirelessSms->send($mobile, "F-Secure code (part of Mobile SafeGuard) is $fSecure_code. T&C: https://nokia.cpp-fs.com/nok.pdf Call 09612100900 (Daily: 10am-7pm) for support. Thanks.");  
+       
+        $fSecureUpdate=DB::table('fsecure')
+        ->where('fsecure_code', '=', $fSecure_code)
+        ->update(array('status' => 1, 'imei' => $imei, 'used_at' => Carbon::now()));
+
+        // $orderLog->pushHandler(new StreamHandler(storage_path('logs/sms.log')), Logger::INFO);
+
+    }
+
+        else if($serviceType=="Extended Warranty") {
+            $output = $SslWirelessSms->send($mobile, "Thanks for purchasing Mobile SafeGuard for 1 year, price BDT $mrp against IMEI:$imei. For support call 09612100900 (10am-7pm), Thanks");  
+            
+            $fSecure_code=DB::table('fsecure')
+            ->select('fsecure_code')
+            ->Where('service_type', "Extended Warranty")
+            ->Where('status', 0)
+            ->pluck('fsecure_code')
+            ->first();
+            $output = $SslWirelessSms->send($mobile, "F-Secure code (part of Mobile SafeGuard) is $fSecure_code. T&C: https://nokia.cpp-fs.com/nok.pdf Call 09612100900 (Daily: 10am-7pm) for support. Thanks.");  
+
+            $fSecureUpdate=DB::table('fsecure')
+            ->where('fsecure_code', '=', $fSecure_code)
+            ->update(array('status' => 1, 'imei' => $imei, 'used_at' => Carbon::now()));
+
+            // $orderLog->pushHandler(new StreamHandler(storage_path('logs/sms.log')), Logger::INFO);
+
+        }
+        else{
+            $output = $SslWirelessSms->send($mobile, "Thanks for purchasing Mobile SafeGuard for 1 year, price BDT $mrp against IMEI:$imei. For support call 09612100900 (10am-7pm), Thanks");   
+           
+            $fSecure_code=DB::table('fsecure')
+            ->select('fsecure_code')
+            ->Where('service_type', "Screen Damage Protection")
+            ->Where('status', 0)
+            ->pluck('fsecure_code')
+            ->first();
+            
+            $output = $SslWirelessSms->send($mobile, "F-Secure code (part of Mobile SafeGuard) is $fSecure_code. T&C: https://nokia.cpp-fs.com/nok.pdf Call 09612100900 (Daily: 10am-7pm) for support. Thanks.");  
+            
+            $fSecureUpdate=DB::table('fsecure')
+            ->where('fsecure_code', '=', $fSecure_code)
+            ->update(array('status' => 1, 'imei' => $imei, 'used_at' => Carbon::now()));
+
+            // $orderLog->pushHandler(new StreamHandler(storage_path('logs/sms.log')), Logger::INFO);
+
+        }
+        
+        return $invoice;
+    }
+    public function succcessTest(){
+        return view('sales.success');
+
+    }
+
     public function create()
     {
+
+        Sales::where('status', 'Not paid')->delete();
         $a=Auth::user()->updated_at;
         $date1 =  Carbon::now();
         $days = $date1->diffInDays($a);
@@ -139,10 +263,11 @@ class SaleController extends Controller
             'title' => 'required',
             // 'customer_name' => 'required',
             'mobile' => 'required|min:11',
-            //'fs_code' => 'required|unique:sales,fs_code',
+            'fs_code' => 'required',
             'mrp' => 'required',
             // 'device_purchase_date' => 'required'
         ]);
+        $a=Carbon::now()->timestamp;
 
         $sale = new Sales;
         $sale->store_id = $request->store_id;
@@ -156,13 +281,43 @@ class SaleController extends Controller
         $sale->customer_name = $CustomerName;
         $sale->mobile = $request->mobile;
         $sale->district = $request->district;
-       $sale->address = $request->address;
-       // $sale->fs_code = $request->fs_code;
+        $sale->address = $request->address;
+
+        $sale->invoice= $a;
+        $sale->fs_code = $request->fs_code;
+
         $sale->fs_mrp = $request->mrp;
         $sale->cpp_price = $request->Cpp_Price;
         $sale->is_verified = 1;
 
         $sale->save();
+
+        if ($request->hasFile('image')) {
+            foreach ($request->file('image') as $key => $image) {
+                $extension = $image->getClientOriginalExtension();
+                $name = $image->getClientOriginalName();
+                $filename = time() . '_' . $name;
+                $fileLocation = 'uploads/sales/';
+                $new_img = Image::make($image->getRealPath())->resize(600, 600);
+                // save file with medium quality
+                $new_img->save($fileLocation . $filename, 90);
+                // $image->move($fileLocation, $filename);
+                $data[$key]['file_name'] = $filename;
+                $data[$key]['file_for'] = 'sales';
+                $data[$key]['file_type'] = 'image';
+                $data[$key]['upload_by'] = Auth::user()->id;
+                $data[$key]['status'] = 1;
+                $data[$key]['file_location'] = $fileLocation;
+                $data[$key]['sales_id'] = $sale->id;
+                $data[$key]['imei'] = $request->imei; //requested IMEI number
+                $data[$key]['created_at'] = Carbon::now();
+                $data[$key]['updated_at'] = Carbon::now();
+            }
+            TempFile::insert($data);
+            Files::insert($data);
+
+        }
+
         
         
      //   Fscodes::where('fscode', $request->fs_code)->update(array('status' => 3, 'sale_by' => Auth::user()->store_id, 'sale_date' => Carbon::now()));
@@ -173,7 +328,7 @@ class SaleController extends Controller
         $SslWirelessSms = new SslWirelessSms($username, $password, $sid);
         if($request->service_type=="Screen Damage Protection") {
 
-            $output =   $SslWirelessSms->send($request->mobile, "Nokia Screen Protection plan for device IMEI No $request->imei is active for next 06 months from today . Call 09612100900 (Daily: 10am-7pm) for support");
+            // $output =   $SslWirelessSms->send($request->mobile, "Nokia Screen Protection plan for device IMEI No $request->imei is active for next 06 months from today . Call 09612100900 (Daily: 10am-7pm) for support");
                                 
             $fSecure_code=DB::table('fsecure')
             ->select('fsecure_code')
@@ -182,7 +337,7 @@ class SaleController extends Controller
             ->pluck('fsecure_code')
             ->first();
 
-            $sendFS = $SslWirelessSms->send($request->mobile, "F-Secure code (part of Nokia Screen Protection plan) is $fSecure_code. T&C: https://eerna.cpp-fs.com/des.pdf Call 09612100900 (Daily: 10am-7pm) for support. Thanks ");
+            $sendFS ="";
 
             $fSecureUpdate=DB::table('fsecure')
             ->where('fsecure_code', '=', $fSecure_code)
@@ -201,8 +356,8 @@ class SaleController extends Controller
 
         }
 
-        elseif($request->service_type=="Extented warranty") {
-            $output =   $SslWirelessSms->send($request->mobile, "Nokia Extented Warranty plan for device IMEI No $request->imei is active for next 12 months from today . Call 09612100900 (Daily: 10am-7pm) for support");
+        elseif($request->service_type=="Extended Warranty") {
+            // $output =   $SslWirelessSms->send($request->mobile, "Nokia Extented Warranty plan for device IMEI No $request->imei is active for next 12 months from today . Call 09612100900 (Daily: 10am-7pm) for support");
                                     
             $fSecure_code=DB::table('fsecure')
             ->select('fsecure_code')
@@ -211,8 +366,7 @@ class SaleController extends Controller
             ->pluck('fsecure_code')
             ->first();
 
-            $sendFS = $SslWirelessSms->send($request->mobile, "F-Secure code (part of Nokia Extented Warranty plan) is $fSecure_code. T&C: https://eerna.cpp-fs.com/des.pdf Call 09612100900 (Daily: 10am-7pm) for support. Thanks ");
-
+            $sendFS ="";
             $fSecureUpdate=DB::table('fsecure')
             ->where('fsecure_code', '=', $fSecure_code)
             ->update(array('status' => 1, 'imei' => $request->imei, 'used_at' => Carbon::now()));
@@ -231,7 +385,7 @@ class SaleController extends Controller
         }
         else
         {
-            $output =   $SslWirelessSms->send($request->mobile, "Nokia others plan for device IMEI No $request->imei is active for next 18 months from today . Call 09612100900 (Daily: 10am-7pm) for support");
+            // $output =   $SslWirelessSms->send($request->mobile, "Nokia others plan for device IMEI No $request->imei is active for next 18 months from today . Call 09612100900 (Daily: 10am-7pm) for support");
                                     
             $fSecure_code=DB::table('fsecure')
             ->select('fsecure_code')
@@ -240,8 +394,7 @@ class SaleController extends Controller
             ->pluck('fsecure_code')
             ->first();
 
-            $sendFS = $SslWirelessSms->send($request->mobile, "F-Secure code (part of Nokia others plan) is $fSecure_code. T&C https://eerna.cpp-fs.com/dee.pdf Call 09612100900 (Daily: 10am-7pm) for support. Thanks");
-
+            $sendFS ="";
             $fSecureUpdate=DB::table('fsecure')
             ->where('fsecure_code', '=', $fSecure_code)
             ->update(array('status' => 1, 'imei' => $request->imei, 'used_at' => Carbon::now()));
@@ -266,7 +419,10 @@ class SaleController extends Controller
                 // // Money Receipt End
         
                   
-        return redirect()->route('sales.create')->with('successMsg', 'Thank you for purchase.');
+        // return redirect()->route('sales.create')->with('successMsg', 'Thank you for purchase.');
+
+        return view('sales.dsales', ['salesInfo' =>$request->Cpp_Price, 'invoice' =>$a, 'imei'=>$request->imei, 'service'=>$request->service_type, 'model'=>$request->model] );
+
     }
 
     public function verifyOtp(Request $request)

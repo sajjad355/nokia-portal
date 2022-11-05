@@ -40,10 +40,10 @@
 
                     <div class="row clearfix">
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-control-label">
-                            <strong>MRP (Screen Protection):</strong>
+                            <strong>Device Price:</strong>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        <img src="{{ asset('assets/taka.png') }}" width="8" height="10">&nbsp;{{$value->mrp}}
+                        <img src="{{ asset('assets/taka.png') }}" width="8" height="10">&nbsp;{{$value->device_price}}
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-control-label">
                         </div>
@@ -51,10 +51,10 @@
 
                     <div class="row clearfix">
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-control-label">
-                            <strong>MRP (Extended Warranty):</strong>
+                            <strong>CPP Price:</strong>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        <img src="{{ asset('assets/taka.png') }}" width="8" height="10">&nbsp;{{$value->mrp_ew}}
+                        <img src="{{ asset('assets/taka.png') }}" width="8" height="10">&nbsp;{{$value->Cpp_Price}}
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-control-label">
                         </div>

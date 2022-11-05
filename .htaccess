@@ -1,6 +1,14 @@
 Options +FollowSymLinks
 RewriteEngine On
-
+RewriteCond %{REQUEST_METHOD} ^(OPTIONS|HEAD) 
+RewriteRule .* - [F]
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.php [L]
+
+# Using this header, any browser that accesses the site over HTTPS will not
+# be able to access the plain HTTP site for one year (31536000 seconds).
+# One you begin using this, you should not stop using SSL on your site or
+# else your returning visitors will not be able to access your site at all.
+Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
+Header set Access-Control-Allow-Methods "GET,POST,PUT,DELETE"

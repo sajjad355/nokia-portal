@@ -73,7 +73,7 @@
                                 <th>Sale Date</th>
                                 <th>Handset Received</th>
                                 <th>Handset Delivered</th>
-                                <!-- <th>Image</th> -->
+                                <th>Image</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -99,7 +99,7 @@
                                 <th>Sale Date</th>
                                 <th>Handset Received</th>
                                 <th>Handset Delivered</th>
-                                <!-- <th>Image</th> -->
+                                <th>Image</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -136,7 +136,7 @@
                                 @else
                                 <td>N/A</td>
                                 @endif
-                                <!-- <td><button data-id="{{ $row->id }}" class='btn btn-info image'>Image</button></td> -->
+                                <td><button data-id="{{ $row->id }}" class='btn btn-info image'>Image</button></td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -203,7 +203,6 @@
         });
     });
 </script>
-
 @endsection
 
 @push('js')

@@ -81,6 +81,7 @@
                                 <!-- <th>Brand</th> -->
                                 <th>Model</th>
                                 <th>Price</th>
+                                <th>Payment Status</th>
                                 <th>Mobile</th>
                                 <th>Address</th>
                                 <th>District</th>
@@ -108,6 +109,7 @@
                                 <!-- <th>Brand</th> -->
                                 <th>Model</th>
                                 <th>Price</th>
+                                <th>Payment Status</th>
                                 <th>Mobile</th>
                                 <!-- <th>Gender</th> -->
                                 <!-- <th>Customer Name</th> -->
@@ -141,6 +143,8 @@
                                 <td>{{ $row->imei}}</td>
                                 <td>{{ $row->model}}</td>
                                 <td>{{ $row->price}}</td>
+                                <td>{{ $row->status}}</td>
+
                                 <td>{{ $row->mobile}}</td>
                                 <td>{{ $row->address}}</td>
                                 <td>{{ $row->district}}</td>

@@ -17,14 +17,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth']], function () {
     Route::resource('change_password', 'PasswordChangeController');
     Route::get('/changed_password', 'PasswordChangeController@create');
 
 });
 
 
-Route::group(['middleware' => 'auth', 'middleware' => ['role:supadmin|salescenter|servicepoint']], function () {
+Route::group(['middleware' => ['auth','role:supadmin|salescenter|servicepoint']], function () {
     Route::post('/chk_disclaimer', 'HomeController@disclaimer')->name('chk_disclaimer');
     Route::resource('sales', 'SaleController');
     Route::post('/get_fscode', 'SaleController@get_fs')->name('get_fscode');
@@ -37,7 +37,7 @@ Route::group(['middleware' => 'auth', 'middleware' => ['role:supadmin|salescente
     Route::post('/get_imei_info', 'SaleController@get_info_by_imei')->name('get_imei_info');
 });
 
-Route::group(['namespace' => 'Admin', 'middleware' => 'auth', 'middleware' => ['role:supadmin|servicepoint|callcenter']], function () {
+Route::group(['namespace' => 'Admin', 'middleware' => ['auth','role:supadmin|servicepoint|callcenter']], function () {
     Route::post('/chk_service_disclaimer', 'ServicePointController@disclaimer_service')->name('chk_service_disclaimer');
     Route::resource('servicepoint', 'ServicePointController');
     Route::post('servicepoint', 'ServicePointController@search')->name('search');
@@ -50,7 +50,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth', 'middleware' => ['
     Route::post('servicepoint/displayImage', 'ServicePointController@display_sales_image')->name('displayImage');
 });
 
-Route::group(['namespace' => 'Admin', 'middleware' => 'auth', 'middleware' => ['role:supadmin|admin|subadmin']], function () {
+Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'role:supadmin|admin|subadmin']], function () {
     Route::get('/total_sale', 'ReportController@total_sale')->name('total');
     Route::post('/total_sale', 'ReportController@total_sale_report')->name('total_sale_report');
     Route::get('/store_wise', 'ReportController@store_wise')->name('store');
@@ -65,13 +65,13 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth', 'middleware' => ['
     Route::post('/imei_wise_delete', 'ReportController@imei_wise_delete_report')->name('imei_wise_delete_report');
     Route::get('/head_office', 'ReportController@date_wise')->name('head');
     Route::post('/showImage', 'ReportController@display_image')->name('show_image');
-    Route::post('/deleteSale/{fscode}/{imei}', 'ReportController@delete_sale')->name('delete_sale');
-    Route::post('/deleteSales/{imei}', 'ReportController@delete_sales')->name('delete_sales');
+    // Route::post('/deleteSale/{fscode}/{imei}', 'ReportController@delete_sale')->name('delete_sale');
+    Route::post('/deleteSales/{imei}/{serviceType}/', 'ReportController@delete_sales')->name('delete_sales');
 
 });
 
 
-Route::group(['namespace' => 'Admin', 'middleware' => 'auth', 'middleware' => ['role:supadmin']], function () {
+Route::group(['namespace' => 'Admin', 'middleware' => ['auth','role:supadmin']], function () {
     Route::resource('users', 'UsersController');
     Route::resource('permission', 'PermissionController');
     Route::resource('roles', 'RolesController');
@@ -103,7 +103,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth', 'middleware' => ['
 
 });
 
-Route::group(['namespace' => 'Admin', 'middleware' => 'auth', 'middleware' => ['role:supadmin|insurance|admin|subadmin']], function () {
+Route::group(['namespace' => 'Admin', 'middleware' => ['auth',  'role:supadmin|insurance|admin|subadmin']], function () {
     Route::get('/ins_sales_report', 'ReportController@insurance_sales')->name('ins_sales');
     Route::post('/ins_sales_report', 'ReportController@insurance_sales_report')->name('insurance_sales_report');
     Route::post('/insImageDisplay', 'ReportController@display_image')->name('ins_display_image');
@@ -112,22 +112,29 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth', 'middleware' => ['
     Route::post('/insServiceImageDisplay', 'ReportController@ins_display_image')->name('ins_display_service_image');
 });
 
-Route::group(['namespace' => 'Admin', 'middleware' => 'auth', 'middleware' => ['role:supadmin|admin|insurance|subadmin']], function () {
+Route::group(['namespace' => 'Admin', 'middleware' => ['auth',  'role:supadmin|admin|subadmin|insurance']], function () {
     Route::get('/date_wise_claim_search', 'ReportController@get_date_wise_claim_report')->name('date_wise_claim_search');
     Route::post('/date_wise_claim_search', 'ReportController@date_wise_claim_report_search')->name('date_wise_claim_report');
 });
 
-Route::group(['namespace' => 'Admin', 'middleware' => 'auth', 'middleware' => ['role:supadmin|admin|insurance|servicepoint|callcenter']], function () {
+Route::group(['namespace' => 'Admin', 'middleware' => ['auth','role:supadmin|admin|insurance|servicepoint|subadmin|callcenter']], function () {
     Route::get('/date_wise_claim_search', 'ReportController@get_date_wise_claim_report')->name('date_wise_claim_search');
     Route::post('/date_wise_claim_search', 'ReportController@date_wise_claim_report_search')->name('date_wise_claim_report');
     Route::post('/insServiceImageDisplay', 'ReportController@ins_display_image')->name('ins_display_service_image');
 });
 
-Route::group(['middleware' => 'auth', 'middleware' => ['role:supadmin|salescenter|callcenter|servicepoint']], function () {
+Route::group(['middleware' => ['auth', 'role:supadmin|salescenter|callcenter|servicepoint']], function () {
     Route::post('/verify_sales', 'SaleController@verifyOtp')->name('otpVerify');
     Route::post('/resend_otp', 'SaleController@resendOtp')->name('resend_otp');
     Route::post('/submit_without_otp', 'SaleController@submitWithoutOtp')->name('submit_without_otp');
     Route::post('/verify_sale/{id}', 'SaleController@saleVerification')->name('sale_verification');
     Route::resource('sales', 'SaleController');
     Route::post('/sales_report', 'SaleController@date_wise_sales_report')->name('sales_report');
+    Route::post('/sales/token', 'PaymentController@token')->name('token');
+    Route::post('/sales/createpayment', 'PaymentController@createpayment')->name('createpayment');
+    Route::get('/success', 'SaleController@succcessTest')->name('succcessTest');
+    Route::post('executepayment', 'PaymentController@executepayment')->name('executepayment');
+    Route::get('bkash/query-payment', 'PaymentController@queryPayment')->name('bkash-query-payment');
+    Route::post('bkash/success', 'SaleController@success')->name('bkash-success');
+    Route::get('/successstore/{invoice}', 'SaleController@successStore')->name('successStore');
 });
