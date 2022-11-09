@@ -3,6 +3,7 @@
 /storage/*.key
 /vendor
 /__MACOSX
+/.env.example
 .env
 .env.backup
 .phpunit.result.cache
